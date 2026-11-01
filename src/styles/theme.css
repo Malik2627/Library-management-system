@@ -1,0 +1,86 @@
+:root {
+  /* Canvas & Dark Navy Background */
+  --bg-canvas: #060913;
+  --bg-canvas-subtle: #090e1c;
+  --bg-canvas-alt: #0c1224;
+  --bg-navy-deep: #080d1a;
+
+  /* Black & Charcoal Glass Surfaces */
+  --glass-bg: rgba(13, 19, 35, 0.78);
+  --glass-bg-hover: rgba(20, 29, 52, 0.85);
+  --glass-bg-active: rgba(26, 38, 68, 0.90);
+  --glass-bg-card: rgba(14, 21, 38, 0.75);
+  --charcoal-surface: #0f1629;
+  --charcoal-surface-alt: #131c33;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.16);
+  --glass-border-glow: rgba(14, 165, 233, 0.35);
+  --glass-blur: blur(16px);
+  --glass-blur-heavy: blur(24px);
+
+  /* Purple & Electric-Blue Brand Accents */
+  --color-electric-blue: #0ea5e9;
+  --color-electric-blue-hover: #38bdf8;
+  --color-blue-glow: rgba(14, 165, 233, 0.25);
+  --color-blue-subtle: rgba(14, 165, 233, 0.12);
+
+  --color-purple: #8b5cf6;
+  --color-purple-hover: #a855f7;
+  --color-purple-glow: rgba(139, 92, 246, 0.25);
+  --color-purple-subtle: rgba(139, 92, 246, 0.12);
+
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #38bdf8;
+  --color-primary-glow: rgba(14, 165, 233, 0.25);
+  --color-primary-subtle: rgba(14, 165, 233, 0.12);
+
+  --color-accent: #8b5cf6;
+  --color-accent-hover: #a855f7;
+  --color-accent-glow: rgba(139, 92, 246, 0.25);
+  --color-accent-subtle: rgba(139, 92, 246, 0.12);
+
+  /* Status Accents */
+  --color-emerald: #10b981;
+  --color-emerald-glow: rgba(16, 185, 129, 0.22);
+  --color-emerald-subtle: rgba(16, 185, 129, 0.12);
+
+  --color-amber: #f59e0b;
+  --color-amber-glow: rgba(245, 158, 11, 0.22);
+  --color-amber-subtle: rgba(245, 158, 11, 0.12);
+
+  --color-rose: #f43f5e;
+  --color-rose-glow: rgba(244, 63, 94, 0.22);
+  --color-rose-subtle: rgba(244, 63, 94, 0.12);
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverted: #030712;
+
+  /* Typography Fonts */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  /* Elevation & Subtle Glow Shadows */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.42);
+  --shadow-glass-lg: 0 16px 48px 0 rgba(0, 0, 0, 0.55);
+  --shadow-glow-blue: 0 0 25px rgba(14, 165, 233, 0.18);
+  --shadow-glow-purple: 0 0 25px rgba(139, 92, 246, 0.18);
+
+  /* Spacing & Rounded Card Radii */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 80px;
+  --header-height: 72px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Smooth Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}

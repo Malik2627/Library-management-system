@@ -1,0 +1,28 @@
+{
+  "name": "libraryhub",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:reducer": "node test-reducer.mjs",
+    "test:books": "node test-book-features.mjs",
+    "test:transactions": "node test-student-transactions.mjs",
+    "test:routes": "node test-routes.mjs",
+    "test:quality": "node test-quality-check.mjs",
+    "test": "node test-reducer.mjs && node test-book-features.mjs && node test-student-transactions.mjs && node test-routes.mjs && node test-quality-check.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
+
