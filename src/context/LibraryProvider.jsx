@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect, useCallback, useMemo } from 'react';
 import { LibraryContext } from './LibraryContext';
-import { libraryReducer, initialState, ACTIONS } from '../reducer/LibraryReducer';
+import { libraryReducer, initialState, ACTIONS } from '../reducer/LibraryReducer.js';
 import { storageService } from '../services/storageService';
 
 /**
