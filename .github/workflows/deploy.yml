@@ -38,14 +38,17 @@ jobs:
       - name: Build production bundle
         run: npm run build
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
       - name: Deploy to gh-pages branch (Static Branch Hosting)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
           branch: gh-pages
+
+      - name: Setup GitHub Pages (Actions Hosting)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+        continue-on-error: true
 
       - name: Upload GitHub Pages artifact (Actions Hosting)
         uses: actions/upload-pages-artifact@v3
