@@ -13,7 +13,7 @@
 
 ## 🌐 Live Deployment & Repository
 
-- **Live Demo URL**: [https://libraryhub-pro.vercel.app](https://libraryhub-pro.vercel.app) *(Deployment Placeholder)*
+- **Live Demo URL**: [https://malik2627.github.io/Library-management-system/](https://malik2627.github.io/Library-management-system/)
 - **GitHub Repository**: [https://github.com/Malik2627/Library-management-system](https://github.com/Malik2627/Library-management-system)
 - **Author**: [@Malik2627](https://github.com/Malik2627)
 
@@ -263,3 +263,4 @@ npm run test:quality        # 57 tests verifying React hooks, a11y, and fallback
 ## 📄 License
 
 This project is licensed under the **MIT License** — feel free to use, modify, and distribute for personal, educational, or commercial purposes.
+

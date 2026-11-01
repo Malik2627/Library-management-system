@@ -21,7 +21,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 export function App() {
   return (
     <LibraryProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<AppLayout />}>
             {/* Dashboard */}
