@@ -1,58 +1,64 @@
 import fs from 'fs';
 import path from 'path';
 
-function getFiles(dir) {
-  let results = [];
-  const list = fs.readdirSync(dir);
-  list.forEach(file => {
-    const full = path.join(dir, file);
-    const stat = fs.statSync(full);
-    if (stat && stat.isDirectory()) {
-      results = results.concat(getFiles(full));
-    } else if (file.endsWith('.js') || file.endsWith('.jsx')) {
-      results.push(full);
+function walk(dir) {
+  let list = [];
+  for (const item of fs.readdirSync(dir)) {
+    const full = path.join(dir, item);
+    if (fs.statSync(full).isDirectory()) {
+      list = list.concat(walk(full));
+    } else if (/\.(jsx?|mjs)$/.test(item)) {
+      list.push(full);
     }
-  });
-  return results;
+  }
+  return list;
 }
 
-// Case-sensitive file existence check (critical for Linux GitHub Actions runners)
-function fileExistsCaseSensitive(targetPath) {
-  const dir = path.dirname(targetPath);
-  const base = path.basename(targetPath);
-  
-  if (!fs.existsSync(dir)) return false;
-  
-  const entries = fs.readdirSync(dir);
-  // Check exact case match
-  if (entries.includes(base)) return true;
-  if (entries.includes(base + '.js')) return true;
-  if (entries.includes(base + '.jsx')) return true;
-  
-  return false;
-}
+const allFiles = [...walk('./src'), ...fs.readdirSync('.').filter(f => f.endsWith('.mjs'))];
+let issues = 0;
 
-const files = [...getFiles('./src'), ...fs.readdirSync('.').filter(f => f.endsWith('.mjs'))];
-let errors = 0;
-
-files.forEach(f => {
-  const content = fs.readFileSync(f, 'utf8');
-  const importMatches = content.matchAll(/from\s+['"](\.[^'"]+)['"]/g);
-  for (const m of importMatches) {
-    const rel = m[1];
-    const dir = path.dirname(f);
-    const resolved = path.resolve(dir, rel);
+allFiles.forEach(file => {
+  const content = fs.readFileSync(file, 'utf8');
+  const dir = path.dirname(file);
+  const regex = /from\s+['"](\.[^'"]+)['"]/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const importPath = match[1];
+    const resolvedBase = path.resolve(dir, importPath);
+    const targetDir = path.dirname(resolvedBase);
+    const targetName = path.basename(resolvedBase);
     
-    if (!fileExistsCaseSensitive(resolved)) {
-      console.error(`❌ CASE-SENSITIVE IMPORT ERROR in ${f}: import '${rel}' does not match disk casing!`);
-      errors++;
+    if (!fs.existsSync(targetDir)) {
+      console.error(`❌ Directory does not exist: ${targetDir} referenced in ${file}`);
+      issues++;
+      continue;
+    }
+    
+    const entries = fs.readdirSync(targetDir);
+    const exactMatch = entries.find(e => 
+      e === targetName || 
+      e === targetName + '.js' || 
+      e === targetName + '.jsx' || 
+      e === targetName + '.mjs'
+    );
+    
+    if (!exactMatch) {
+      console.error(`❌ MISMATCH in ${file}: import "${importPath}" not found in ${targetDir}`);
+      issues++;
+    } else {
+      const stem = exactMatch.replace(/\.(jsx?|mjs)$/, '');
+      if (stem !== targetName && exactMatch !== targetName) {
+        console.error(`❌ CASING DIFFERENCE in ${file}: imported "${targetName}" vs actual disk file "${exactMatch}"`);
+        issues++;
+      }
     }
   }
 });
 
-if (errors === 0) {
-  console.log(`✅ SUCCESS: All ${files.length} source & test files have 100% case-sensitive valid imports!`);
+if (issues === 0) {
+  console.log(`✅ ALL ${allFiles.length} FILES HAVE 100% PERFECT EXACT-CASING IMPORTS!`);
+  process.exit(0);
 } else {
-  console.error(`❌ Total broken imports found: ${errors}`);
+  console.error(`❌ Total casing/import issues: ${issues}`);
   process.exit(1);
 }
